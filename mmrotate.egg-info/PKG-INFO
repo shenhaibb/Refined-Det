@@ -1,0 +1,67 @@
+Metadata-Version: 2.1
+Name: mmrotate
+Version: 0.3.3
+Summary: Rotation Detection Toolbox and Benchmark
+Home-page: https://github.com/open-mmlab/mmrotate
+Author: MMRotate Authors
+Author-email: openmmlab@gmail.com
+License: Apache License 2.0
+Keywords: computer vision,object detection,rotation detection
+Classifier: Development Status :: 4 - Beta
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Description-Content-Type: text/markdown
+Provides-Extra: all
+Provides-Extra: tests
+Provides-Extra: build
+Provides-Extra: optional
+Provides-Extra: mim
+
+# Refined-Det
+
+This repository contains the Pytorch implementations of the following paper:
+
+Xiaohan Rao, Liming Zhou, Yang Liu, and Lanxue Dang. Refined-Det: A Refined Anchor-based Detector for Arbitrary-Oriented Object Detection. &nbsp; [Paper]()
+
+<!-- [ALGORITHM] -->
+
+## Abstract
+
+The detection of arbitrary-oriented objects in aerial images has attracted research interest and attention due to its widespread applications. However, most existing methods have an imbalance between foreground and background during training phase, and the inconsistency between classification scores and localization accuracy. In this paper, a refined anchor-based detector is proposed to achieve high-precision detection of arbitrary-oriented objects, namely Refined-Det. Firstly, we adopt the Cross-grid Label Assignment (CLA) to increase the number of high-quality positive samples available for training. Furthermore, considering the issue of inaccurately positioning dense objects in the model, we design the Feature Refinement Head (FRHead), which accurately regresses oriented bounding boxes by aligning object rotation features. The experiments results on the HRSC2016 and DOTA  demonstrate that the proposed method can achieve superior performance.
+
+<div align=center>
+<img src="https://raw.github.com/shenhaibb/Refined-Det/main/imgs/Refined_Det.jpg" alt="Refined_Det" width="80%"/>
+</div>
+
+## Results and models
+
+HRSC2016
+
+|      Backbone       |  mAP  | Angle | lr schd | Mem (GB) | Inf Time (fps) |  Aug  | Batch Size |                                               Configs                                                 |                                                                                                                                                                                              Download                                                                                                                                                                                             |
+| :-----------------: | :---: | :---: | :-----: | :------: | :------------: | :---: | :--------: | :---------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| ResNet50 (800,512)  | 90.42 | le90  |   6x    |   1.56   |       -        |  RR   |     2      | [refined_det_obb_r50_fpn_6x_hrsc_rr_le90](../refined_det/refined_det_obb_r50_fpn_6x_hrsc_rr_le90.py)  |         [model](https://download.openmmlab.com/mmrotate/v0.1.0/rotated_retinanet/rotated_retinanet_obb_r50_fpn_6x_hrsc_rr_le90/rotated_retinanet_obb_r50_fpn_6x_hrsc_rr_le90-ee4f18af.pth) \ [log](https://download.openmmlab.com/mmrotate/v0.1.0/rotated_retinanet/rotated_retinanet_obb_r50_fpn_6x_hrsc_rr_le90/rotated_retinanet_obb_r50_fpn_6x_hrsc_rr_le90_20220412_110739.log.json)         |
+| ResNet101 (800,512) | 90.49 | le90  |   6x    |   1.56   |       -        |  RR   |     2      | [refined_det_obb_r101_fpn_6x_hrsc_rr_le90](./refined_det/refined_det_obb_r101_fpn_6x_hrsc_rr_le90.py) | [model](https://download.openmmlab.com/mmrotate/v0.1.0/kld/rotated_retinanet_obb_kld_stable_r50_fpn_6x_hrsc_rr_le90/rotated_retinanet_obb_kld_stable_r50_fpn_6x_hrsc_rr_le90-58665364.pth) \ [log](https://download.openmmlab.com/mmrotate/v0.1.0/kld/rotated_retinanet_obb_kld_stable_r50_fpn_6x_hrsc_rr_le90/rotated_retinanet_obb_kld_stable_r50_fpn_6x_hrsc_rr_le90_20220412_155521.log.json) |
+
+DOTA1.0
+
+|          Backbone          |  mAP  | Angle | lr schd | Mem (GB) | Inf Time (fps) |  Aug  | Batch Size |                                               Configs                                             |                                                                                                                                                                                                                   Download                                                                                                                                                                                                                   |
+| :------------------------: | :---: | :---: | :-----: | :------: | :------------: | :---: | :--------: | :-----------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+|  ResNet50 (1024,1024,200)  | 72.63 | le90  |   1x    |   3.45   |       -        |   -   |      2     | [refined_det_obb_r50_fpn_1x_dota_le90](../refined_det/refined_det_obb_r50_fpn_1x_dota_le90.py)    | [model](https://download.openmmlab.com/mmrotate/v0.1.0/rotated_reppoints/rotated_reppoints_r50_fpn_1x_dota_oc/rotated_reppoints_r50_fpn_1x_dota_oc-d38ce217.pth) \ [log](https://download.openmmlab.com/mmrotate/v0.1.0/kld/rotated_retinanet_obb_kld_stable_r50_fpn_1x_dota_le90/rotated_retinanet_obb_kld_stable_r50_fpn_1x_dota_le90_20220402_225531.log.json)                            |
+|  ResNet101 (1024,1024,200) | 73.86 | le90  |   1x    |   3.45   |       -        |   -   |      2     | [refined_det_obb_r101_fpn_1x_dota_le90](../refined_det/refined_det_obb_r101_fpn_1x_dota_le90.py)  |       [model](https://download.openmmlab.com/mmrotate/v0.1.0/cfa/cfa_r50_fpn_1x_dota_le135/cfa_r50_fpn_1x_dota_le135-aed1cbc6.pth) \ [log](https://download.openmmlab.com/mmrotate/v0.1.0/kld/rotated_retinanet_obb_kld_stable_r50_fpn_1x_dota_le90/rotated_retinanet_obb_kld_stable_r50_fpn_1x_dota_le90_20220402_225531.log.json)                            |
+
+**Notes:**
+
+- `RR` means random rotation.
+- At this time bbox loss uses horizontal bbox loss such as `FocalLoss`, `SmoothL1Loss`.
+- Inf time was tested on a single RTX3090.
+
+## Citation
+
+```
+
+```
